@@ -1,0 +1,14 @@
+spring.application.name=drivers-service
+server.port=8005
+spring.config.import=optional:configserver:http://localhost:8888
+
+spring.profiles.active=dev
+#spring.cloud.config.profile=dev
+
+spring.datasource.url=jdbc:h2:mem:driversdb
+spring.h2.console.enabled=true
+spring.jpa.show-sql=true
+spring.jpa.defer-datasource-initialization=true
+
+#drivers-service.minimum=3
+#drivers-service.maximum=997

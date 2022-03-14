@@ -1,0 +1,15 @@
+package com.michael.microservices.driversservice.bean;
+
+import java.time.LocalTime;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface DriversRepository extends JpaRepository<Driver, Long>{
+	
+	public List<Driver> getDriversByStatus(DriverStatus status);
+	
+	public List<Driver> getDriversByWorkHours(LocalTime workStart, LocalTime workFinish);
+	
+	//public List<Driver> getDriversInBounds();
+}

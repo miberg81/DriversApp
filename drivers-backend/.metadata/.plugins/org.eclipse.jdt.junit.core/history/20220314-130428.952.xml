@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="DriversServiceApplicationTests" project="drivers-service" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.michael.microservices.driversservice.DriversServiceApplicationTests" time="0.096" displayname="DriversServiceApplicationTests" uniqueid="[engine:junit-jupiter]/[class:com.michael.microservices.driversservice.DriversServiceApplicationTests]">
+    <testcase name="contextLoads" classname="com.michael.microservices.driversservice.DriversServiceApplicationTests" time="0.096" displayname="contextLoads()" uniqueid="[engine:junit-jupiter]/[class:com.michael.microservices.driversservice.DriversServiceApplicationTests]/[method:contextLoads()]"/>
+  </testsuite>
+</testrun>

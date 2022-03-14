@@ -1,0 +1,59 @@
+package com.michael.microservices.driversservice.bean;
+
+import java.util.Objects;
+
+import javax.persistence.Embeddable;
+
+// Drivers's current location
+@Embeddable
+public class Location {
+	private String locationName;
+	
+    private double longitude;
+    private double latitude;   
+   
+    public Location() {}
+
+	// create and initialize a point with given name and
+    // (latitude, longitude) specified in degrees
+    public Location(String name, double latitude, double longitude) {
+    		super();
+    		if(name == null) {
+    			this.locationName = "unknown";
+    		} else {
+    			this.locationName = name;  			
+    		}
+        this.latitude  = latitude;
+        this.longitude = longitude;
+    }
+
+	public String getName() {
+		return locationName;
+	}
+
+	public void setName(String name) {
+		this.locationName = name;
+	}
+
+	public double getLongitude() {
+		return longitude;
+	}
+
+	public void setLongitude(double longitude) {
+		this.longitude = longitude;
+	}
+
+	public double getLatitude() {
+		return latitude;
+	}
+
+	public void setLatitude(double latitude) {
+		this.latitude = latitude;
+	}
+
+	@Override
+	public String toString() {
+		return "Location [driverId=" + driverId + ", locationName=" + locationName + ", longitude=" + longitude
+				+ ", latitude=" + latitude + "]";
+	}
+}

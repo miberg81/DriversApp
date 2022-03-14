@@ -1,0 +1,68 @@
+package com.michael.microservices.driversservice.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.michael.microservices.driversservice.bean.Driver;
+import com.michael.microservices.driversservice.bean.DriversRepository;
+import com.michael.microservices.driversservice.configuration.Configuration;
+
+@RestController
+public class DriversController {
+	
+	@Autowired
+	private Configuration configuration;
+	
+	@Autowired
+	private DriversRepository repository;
+
+	/**
+	 * Returns all drivers currently in the repository
+	 * @return List<Driver>
+	 */
+	@GetMapping("/drivers")
+	public List<Driver> getDrivers() {
+		return repository.findAll();
+	}
+	
+	/**
+	 * Adds a new driver to the repository
+	 * @param newDriver
+	 * @return Driver - the driver that was added in case of success, null otherwise
+	 */
+	@PostMapping("/add-driver")
+	public Driver addDriver(@RequestBody Driver newDriver) {
+		if(newDriver != null) {
+			return repository.save(newDriver);
+		}
+		return null;
+	}
+	
+	/**
+	 * @param driverId
+	 * @return Driver
+	 */
+	@PostMapping("/delete-driver")
+	public Driver deleteDriver(@RequestBody Long driverId) {
+		Driver driverToDelete = repository.getById(driverId);
+		if(driverToDelete != null) {
+			repository.delete(driverToDelete);
+			return driverToDelete;
+		}
+		return null;
+	}
+	
+//	@GetMapping("/limits")
+//	public Limits retrieveLimits() {
+//		//return new Limits(1,1000);
+//		return new Limits(
+//				configuration.getMinimum(),
+//				configuration.getMaximum()
+//		);
+//	}
+}

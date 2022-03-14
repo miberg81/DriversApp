@@ -1,0 +1,9 @@
+spring.application.name=drivers-service
+spring.port=8080
+spring.config.import=optional:configserver:http://localhost:8888
+
+spring.profiles.active=dev
+spring.cloud.config.profile=dev
+
+drivers-service.minimum=3
+drivers-service.maximum=997

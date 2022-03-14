@@ -1,0 +1,39 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.michael.microservices.driversservice.bean.Driver;
+import com.michael.microservices.driversservice.bean.DriversRepository;
+
+@Configuration
+public class LoadDatabase {
+	private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
+	
+	@Bean
+	CommandLineRunner initDatabase(DriversRepository repository) {
+		return args -> {
+		      log.info("Preloading " + repository.save(
+		    		  new Driver("driver1", "last_name1", 21, "email1@gmail.com", "0507656451", 8, 16)));
+		      log.info("Preloading " + repository.save(
+		    		  new Driver("driver2", "last_name2", 21, "email2@gmail.com", "0507656452", 8, 16)));
+		      log.info("Preloading " + repository.save(
+		    		  new Driver("driver3", "last_name3", 21, "email3@gmail.com", "0507656453", 8, 16)));
+		      log.info("Preloading " + repository.save(
+		    		  new Driver("driver4", "last_name4", 21, "email4@gmail.com", "0507656454", 8, 16)));
+		      log.info("Preloading " + repository.save(
+		    		  new Driver("driver5", "last_name5", 21, "email5@gmail.com", "0507656455", 8, 16)));
+		      log.info("Preloading " + repository.save(
+		    		  new Driver("driver6", "last_name6", 21, "email6@gmail.com", "0507656456", 8, 16)));
+		      log.info("Preloading " + repository.save(
+		    		  new Driver("driver7", "last_name7", 21, "email7@gmail.com", "0507656457", 8, 16)));
+		      log.info("Preloading " + repository.save(
+		    		  new Driver("driver8", "last_name8", 21, "email8@gmail.com", "0507656458", 8, 16)));
+		      log.info("Preloading " + repository.save(
+		    		  new Driver("driver9", "last_name9", 21, "email9@gmail.com", "0507656459", 8, 16)));
+		      log.info("Preloading " + repository.save(
+		    		  new Driver("driver10", "last_name10", 21, "email10@gmail.com", "0507656410", 8, 16)));
+		    };
+	}
+}

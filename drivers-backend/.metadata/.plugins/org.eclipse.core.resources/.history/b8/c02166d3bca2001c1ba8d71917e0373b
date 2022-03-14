@@ -1,0 +1,89 @@
+package com.michael.microservices.driversservice.bean;
+import java.util.Objects;
+
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
+// Drivers address
+@Embeddable
+public class Address {
+	String country;
+	String city;
+	String street;
+	Integer houseNum;
+	Integer floor;
+	Integer apartmentNum;
+	
+	public Address() {}
+
+	public Address(String country, String city, String street, Integer houseNum, Integer floor, Integer apartmentNum) {
+		super();
+		this.country = country;
+		this.city = city;
+		this.street = street;
+		this.houseNum = houseNum;
+		this.floor = floor;
+		this.apartmentNum = apartmentNum;
+	}
+	
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+	public String getStreet() {
+		return street;
+	}
+	public void setStreet(String street) {
+		this.street = street;
+	}
+	public Integer getHouseNum() {
+		return houseNum;
+	}
+	public void setHouseNum(Integer houseNum) {
+		this.houseNum = houseNum;
+	}
+	public Integer getApartmentNum() {
+		return apartmentNum;
+	}
+	public void setApartmentNum(Integer apartmentNum) {
+		this.apartmentNum = apartmentNum;
+	}
+	public Integer getFloor() {
+		return floor;
+	}
+	public void setFloor(Integer floor) {
+		this.floor = floor;
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(apartmentNum, city, country, driverId, floor, houseNum, street);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Address))
+			return false;
+		Address other = (Address) obj;
+		return Objects.equals(apartmentNum, other.apartmentNum) && Objects.equals(city, other.city)
+				&& Objects.equals(country, other.country) && Objects.equals(driverId, other.driverId)
+				&& Objects.equals(floor, other.floor) && Objects.equals(houseNum, other.houseNum)
+				&& Objects.equals(street, other.street);
+	}
+
+	@Override
+	public String toString() {
+		return "Address [driverId=" + driverId + ", country=" + country + ", city=" + city + ", street=" + street
+				+ ", houseNum=" + houseNum + ", floor=" + floor + ", apartmentNum=" + apartmentNum + "]";
+	}
+}

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="DriversRestControllerIntegrationTest" project="drivers-service" tests="1" started="1" failures="0" errors="0" ignored="0">
+  <testsuite name="com.michael.microservices.driversservice.DriversRestControllerIntegrationTest" time="0.508" displayname="DriversRestControllerIntegrationTest" uniqueid="[engine:junit-vintage]/[runner:com.michael.microservices.driversservice.DriversRestControllerIntegrationTest]">
+    <testcase name="givenDrivers_whenGetDrivers_thenStatus200" classname="com.michael.microservices.driversservice.DriversRestControllerIntegrationTest" time="0.508" displayname="givenDrivers_whenGetDrivers_thenStatus200" uniqueid="[engine:junit-vintage]/[runner:com.michael.microservices.driversservice.DriversRestControllerIntegrationTest]/[test:givenDrivers_whenGetDrivers_thenStatus200(com.michael.microservices.driversservice.DriversRestControllerIntegrationTest)]"/>
+  </testsuite>
+</testrun>

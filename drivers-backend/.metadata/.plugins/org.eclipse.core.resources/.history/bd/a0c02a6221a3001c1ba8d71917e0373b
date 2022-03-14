@@ -1,0 +1,27 @@
+package com.michael.microservices.driversservice.bean;
+
+import java.time.LocalTime;
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface DriversRepository extends JpaRepository<Driver, Long>{
+	
+	/**
+	 * Finds drivers by status: active or inactive
+	 * @param status
+	 * @return List<Driver>
+	 */
+	public List<Driver> findByStatus(Status status);
+	
+	/**
+	 * Finds drivers thats work between start and finish time
+	 * @param start
+	 * @param finish
+	 * @return List<Driver>
+	 */
+	public List<Driver> findByStartAfterAndFinishBefore(LocalTime start, LocalTime finish);
+	
+	
+	public List<Driver> getDriversInMapBounds(Double latitude, Double longitude);
+}

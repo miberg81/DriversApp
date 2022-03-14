@@ -1,0 +1,173 @@
+package com.michael.microservices.driversservice.controller;
+
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.michael.microservices.driversservice.bean.Address;
+import com.michael.microservices.driversservice.bean.Driver;
+import com.michael.microservices.driversservice.bean.DriverNotFoundException;
+import com.michael.microservices.driversservice.bean.DriversRepository;
+import com.michael.microservices.driversservice.bean.Location;
+import com.michael.microservices.driversservice.bean.Status;
+import com.michael.microservices.driversservice.configuration.Configuration;
+
+@RestController
+public class DriversController {
+	
+	@Autowired
+	private Configuration configuration;
+	
+	@Autowired
+	private DriversRepository repository;
+
+	// Basic Endpoints:
+	
+	/**
+	 * Returns all drivers currently in the repository
+	 * @return List<Driver>
+	 */
+	@GetMapping("/drivers")
+	public List<Driver> getDrivers() {
+		return repository.findAll();
+	}
+	
+	/**
+	 * Returns a single driver by driverId
+	 * @param driverId
+	 * @return Driver
+	 */
+	@GetMapping("/drivers/{id}")
+	public Driver getDriverById(@PathVariable Long id) {
+		return repository.findById(id).orElseThrow(() -> new DriverNotFoundException(id));
+	}
+	
+	/**
+	 * Adds a new driver to the repository (if doesn't exist) or updates the existing record
+	 * @param newDriver
+	 * @return Driver - the driver object that was added
+	 */
+	@PostMapping("/drivers")
+	public Driver saveDriver(@RequestBody Driver newDriver) {
+		return repository.save(newDriver);
+	}
+	
+	/**
+	 * Update driver record by id or create new one if no such id found
+	 * @param newDriver
+	 * @param id
+	 * @return Driver - the driver object that was updated
+	 */
+	@PutMapping("/drivers/{id}")
+	public Driver replaceEmployee(@RequestBody Driver newDriver, @PathVariable Long id) {
+		return repository.findById(id)
+				.map(driver -> {
+					// update existing record with the given id
+					driver.setFirstName(newDriver.getFirstName());
+					driver.setLastName(newDriver.getLastName());
+					driver.setAge(newDriver.getAge());
+					driver.setEmail(newDriver.getEmail());
+					driver.setPhoneNum(newDriver.getPhoneNum());
+					driver.setStart(newDriver.getStart());
+					driver.setFinish(newDriver.getFinish());
+					return repository.save(driver);
+				})
+				.orElseGet(() -> {
+					// create new driver record with the given id
+					newDriver.setDriverId(id);
+					return repository.save(newDriver);
+				});
+	}
+	
+	/**
+	 * Saves current driver location to the db
+	 * @param location
+	 * @param id
+	 * @return Location - the updated location
+	 */
+	@PutMapping("/drivers/{id}/location")
+	public Location updateLocation(@RequestBody Location location, @PathVariable Long id) {
+		Optional<Driver> driverOpt = repository.findById(id);
+		if(driverOpt.isPresent()) {
+			Driver driver = driverOpt.get();
+			driver.setLocation(location);
+			repository.save(driver);
+			return location;
+		}
+		else throw new DriverNotFoundException(id);
+	}
+	
+	/**
+	 * Saves current driver location to the db
+	 * @param location
+	 * @param id
+	 * @return Location - the updated location
+	 */
+	@PutMapping("/drivers/{id}/address")
+	public Address updateLocation(@RequestBody Address address, @PathVariable Long id) {
+		Optional<Driver> driverOpt = repository.findById(id);
+		if(driverOpt.isPresent()) {
+			Driver driver = driverOpt.get();
+			driver.setAddress(address);
+			repository.save(driver);
+			return address;
+		}
+		else throw new DriverNotFoundException(id);
+	}
+	
+	/**
+	 * Deletes the given driver from the DB
+	 * @param id
+	 * @return Driver - the driver entity which was deleted
+	 */
+	@DeleteMapping("/drivers/{id}")
+	public Driver deleteDriver(@PathVariable Long id) {
+		Optional<Driver> driverToDelete = repository.findById(id);
+		if(driverToDelete.isPresent()) {
+			repository.deleteById(id);
+			return driverToDelete.get();
+		}
+		else 
+			throw new DriverNotFoundException(id);
+	}
+	
+	// Query Endpoints
+	
+	/**
+	 * Returns drivers which are currently active
+	 * @return List<Driver>
+	 */
+	@GetMapping("/drivers/active")
+	public List<Driver> getActiveDrivers(){
+		return this.repository.findByStatus(Status.ACTIVE);
+	}
+	
+	/**
+	 * Returns drivers which are currently inactive
+	 * @return List<Driver>
+	 */
+	@GetMapping("/drivers/inactive")
+	public List<Driver> getInactiveDrivers(){
+		return this.repository.findByStatus(Status.INACTIVE);
+	}
+	
+	public List<Driver> getDriversWorkingBeatwean(LocalTime start, LocalTime finish)
+	
+	
+//	@GetMapping("/limits")
+//	public Limits retrieveLimits() {
+//		//return new Limits(1,1000);
+//		return new Limits(
+//				configuration.getMinimum(),
+//				configuration.getMaximum()
+//		);
+//	}
+}

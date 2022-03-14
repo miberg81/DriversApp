@@ -1,0 +1,12 @@
+spring.application.name=drivers-service
+spring.port=8005
+spring.config.import=optional:configserver:http://localhost:8888
+
+spring.profiles.active=qa
+#spring.cloud.config.profile=dev
+
+#To use name of the config file different from the appliocation name(default)
+#spring.cloud.config.name=
+
+#drivers-service.minimum=3
+#drivers-service.maximum=997

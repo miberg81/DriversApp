@@ -1,0 +1,9 @@
+package com.michael.microservices.driversservice.bean;
+
+public class Address {
+	String country;
+	String city;
+	String street;
+	Integer houseNum;
+	Integer apartmentNum;
+}

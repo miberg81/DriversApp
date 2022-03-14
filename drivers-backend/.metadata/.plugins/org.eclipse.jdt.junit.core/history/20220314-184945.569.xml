@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?><testrun name="DriversRestControllerIntegrationTest" project="drivers-service" tests="6" started="6" failures="1" errors="0" ignored="0">
+  <testsuite name="com.michael.microservices.driversservice.DriversRestControllerIntegrationTest" time="0.627" displayname="DriversRestControllerIntegrationTest" uniqueid="[engine:junit-vintage]/[runner:com.michael.microservices.driversservice.DriversRestControllerIntegrationTest]">
+    <testcase name="updateLocationTest" classname="com.michael.microservices.driversservice.DriversRestControllerIntegrationTest" time="0.368" displayname="updateLocationTest" uniqueid="[engine:junit-vintage]/[runner:com.michael.microservices.driversservice.DriversRestControllerIntegrationTest]/[test:updateLocationTest(com.michael.microservices.driversservice.DriversRestControllerIntegrationTest)]"/>
+    <testcase name="getDriverByIdTest" classname="com.michael.microservices.driversservice.DriversRestControllerIntegrationTest" time="0.044" displayname="getDriverByIdTest" uniqueid="[engine:junit-vintage]/[runner:com.michael.microservices.driversservice.DriversRestControllerIntegrationTest]/[test:getDriverByIdTest(com.michael.microservices.driversservice.DriversRestControllerIntegrationTest)]"/>
+    <testcase name="getDriversTest" classname="com.michael.microservices.driversservice.DriversRestControllerIntegrationTest" time="0.149" displayname="getDriversTest" uniqueid="[engine:junit-vintage]/[runner:com.michael.microservices.driversservice.DriversRestControllerIntegrationTest]/[test:getDriversTest(com.michael.microservices.driversservice.DriversRestControllerIntegrationTest)]"/>
+    <testcase name="replaceDriverTest" classname="com.michael.microservices.driversservice.DriversRestControllerIntegrationTest" time="0.025" displayname="replaceDriverTest" uniqueid="[engine:junit-vintage]/[runner:com.michael.microservices.driversservice.DriversRestControllerIntegrationTest]/[test:replaceDriverTest(com.michael.microservices.driversservice.DriversRestControllerIntegrationTest)]"/>
+    <testcase name="addNewDriverTest" classname="com.michael.microservices.driversservice.DriversRestControllerIntegrationTest" time="0.017" displayname="addNewDriverTest" uniqueid="[engine:junit-vintage]/[runner:com.michael.microservices.driversservice.DriversRestControllerIntegrationTest]/[test:addNewDriverTest(com.michael.microservices.driversservice.DriversRestControllerIntegrationTest)]"/>
+    <testcase name="updateAddressTest" classname="com.michael.microservices.driversservice.DriversRestControllerIntegrationTest" time="0.021" displayname="updateAddressTest" uniqueid="[engine:junit-vintage]/[runner:com.michael.microservices.driversservice.DriversRestControllerIntegrationTest]/[test:updateAddressTest(com.michael.microservices.driversservice.DriversRestControllerIntegrationTest)]">
+      <failure>java.lang.AssertionError: No value at JSON path "$.comment"&#13;
+	at org.springframework.test.util.JsonPathExpectationsHelper.evaluateJsonPath(JsonPathExpectationsHelper.java:304)&#13;
+	at org.springframework.test.util.JsonPathExpectationsHelper.assertValue(JsonPathExpectationsHelper.java:73)&#13;
+	at org.springframework.test.web.servlet.result.JsonPathResultMatchers.lambda$value$0(JsonPathResultMatchers.java:87)&#13;
+	at org.springframework.test.web.servlet.MockMvc$1.andExpect(MockMvc.java:212)&#13;
+	at com.michael.microservices.driversservice.DriversRestControllerIntegrationTest.updateAddressTest(DriversRestControllerIntegrationTest.java:143)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method)&#13;
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62)&#13;
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43)&#13;
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566)&#13;
+	at org.junit.runners.model.FrameworkMethod$1.runReflectiveCall(FrameworkMethod.java:59)&#13;
+	at org.junit.internal.runners.model.ReflectiveCallable.run(ReflectiveCallable.java:12)&#13;
+	at org.junit.runners.model.FrameworkMethod.invokeExplosively(FrameworkMethod.java:56)&#13;
+	at org.junit.internal.runners.statements.InvokeMethod.evaluate(InvokeMethod.java:17)&#13;
+	at org.springframework.test.context.junit4.statements.RunBeforeTestExecutionCallbacks.evaluate(RunBeforeTestExecutionCallbacks.java:74)&#13;
+	at org.springframework.test.context.junit4.statements.RunAfterTestExecutionCallbacks.evaluate(RunAfterTestExecutionCallbacks.java:84)&#13;
+	at org.springframework.test.context.junit4.statements.RunBeforeTestMethodCallbacks.evaluate(RunBeforeTestMethodCallbacks.java:75)&#13;
+	at org.springframework.test.context.junit4.statements.RunAfterTestMethodCallbacks.evaluate(RunAfterTestMethodCallbacks.java:86)&#13;
+	at org.springframework.test.context.junit4.statements.SpringRepeat.evaluate(SpringRepeat.java:84)&#13;
+	at org.junit.runners.ParentRunner.runLeaf(ParentRunner.java:366)&#13;
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:251)&#13;
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.runChild(SpringJUnit4ClassRunner.java:97)&#13;
+	at org.junit.runners.ParentRunner$4.run(ParentRunner.java:331)&#13;
+	at org.junit.runners.ParentRunner$1.schedule(ParentRunner.java:79)&#13;
+	at org.junit.runners.ParentRunner.runChildren(ParentRunner.java:329)&#13;
+	at org.junit.runners.ParentRunner.access$100(ParentRunner.java:66)&#13;
+	at org.junit.runners.ParentRunner$2.evaluate(ParentRunner.java:293)&#13;
+	at org.springframework.test.context.junit4.statements.RunBeforeTestClassCallbacks.evaluate(RunBeforeTestClassCallbacks.java:61)&#13;
+	at org.springframework.test.context.junit4.statements.RunAfterTestClassCallbacks.evaluate(RunAfterTestClassCallbacks.java:70)&#13;
+	at org.junit.runners.ParentRunner$3.evaluate(ParentRunner.java:306)&#13;
+	at org.junit.runners.ParentRunner.run(ParentRunner.java:413)&#13;
+	at org.springframework.test.context.junit4.SpringJUnit4ClassRunner.run(SpringJUnit4ClassRunner.java:190)&#13;
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:137)&#13;
+	at org.junit.runner.JUnitCore.run(JUnitCore.java:115)&#13;
+	at org.junit.vintage.engine.execution.RunnerExecutor.execute(RunnerExecutor.java:43)&#13;
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.accept(ForEachOps.java:183)&#13;
+	at java.base/java.util.stream.ReferencePipeline$3$1.accept(ReferencePipeline.java:195)&#13;
+	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)&#13;
+	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1801)&#13;
+	at java.base/java.util.stream.AbstractPipeline.copyInto(AbstractPipeline.java:484)&#13;
+	at java.base/java.util.stream.AbstractPipeline.wrapAndCopyInto(AbstractPipeline.java:474)&#13;
+	at java.base/java.util.stream.ForEachOps$ForEachOp.evaluateSequential(ForEachOps.java:150)&#13;
+	at java.base/java.util.stream.ForEachOps$ForEachOp$OfRef.evaluateSequential(ForEachOps.java:173)&#13;
+	at java.base/java.util.stream.AbstractPipeline.evaluate(AbstractPipeline.java:234)&#13;
+	at java.base/java.util.stream.ReferencePipeline.forEach(ReferencePipeline.java:497)&#13;
+	at org.junit.vintage.engine.VintageTestEngine.executeAllChildren(VintageTestEngine.java:82)&#13;
+	at org.junit.vintage.engine.VintageTestEngine.execute(VintageTestEngine.java:73)&#13;
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:108)&#13;
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:88)&#13;
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.lambda$execute$0(EngineExecutionOrchestrator.java:54)&#13;
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.withInterceptedStreams(EngineExecutionOrchestrator.java:67)&#13;
+	at org.junit.platform.launcher.core.EngineExecutionOrchestrator.execute(EngineExecutionOrchestrator.java:52)&#13;
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:96)&#13;
+	at org.junit.platform.launcher.core.DefaultLauncher.execute(DefaultLauncher.java:84)&#13;
+	at org.eclipse.jdt.internal.junit5.runner.JUnit5TestReference.run(JUnit5TestReference.java:98)&#13;
+	at org.eclipse.jdt.internal.junit.runner.TestExecution.run(TestExecution.java:40)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:529)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.runTests(RemoteTestRunner.java:756)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.run(RemoteTestRunner.java:452)&#13;
+	at org.eclipse.jdt.internal.junit.runner.RemoteTestRunner.main(RemoteTestRunner.java:210)&#13;
+Caused by: com.jayway.jsonpath.PathNotFoundException: No results for path: $['comment']&#13;
+	at com.jayway.jsonpath.internal.path.EvaluationContextImpl.getValue(EvaluationContextImpl.java:133)&#13;
+	at com.jayway.jsonpath.JsonPath.read(JsonPath.java:183)&#13;
+	at com.jayway.jsonpath.JsonPath.read(JsonPath.java:341)&#13;
+	at com.jayway.jsonpath.JsonPath.read(JsonPath.java:325)&#13;
+	at org.springframework.test.util.JsonPathExpectationsHelper.evaluateJsonPath(JsonPathExpectationsHelper.java:301)&#13;
+	... 58 more&#13;
+&#13;
+</failure>
+    </testcase>
+  </testsuite>
+</testrun>

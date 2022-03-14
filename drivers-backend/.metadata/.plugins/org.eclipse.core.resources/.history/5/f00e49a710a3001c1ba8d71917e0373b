@@ -1,0 +1,215 @@
+package com.michael.microservices.driversservice.bean;
+
+import java.time.LocalTime;
+import java.util.Objects;
+
+import javax.persistence.Embedded;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+// A driver model to store personal information,
+// driver status, working hours and current location.
+@Entity
+@Table(name = "DRIVERS")
+public class Driver {
+	
+	// ISSENTIAL DRIVER INFO
+	@Id @GeneratedValue
+	Long id; // positive, unique integer driver identifier, can't be changed after initialization
+	
+	String firstName;
+	
+	String lastName;
+	
+	LocalTime start;
+	
+	LocalTime finish;
+	
+	Status status = Status.INACTIVE; // inactive unless reported otherwise
+	
+	@Embedded
+	Location location;
+	
+	// ADDITIONAL DRIVER INFO
+	Integer age;
+	
+	String email;
+	
+	String phoneNum;
+	
+	@Embedded
+	Address address;
+	
+	public Driver() {}
+
+	// constructor with minimum information.
+	// needed for registration and working day setup.
+	// location and address may be added later when the driver reports it via app.
+	public Driver(String firstName, String lastName, Status status, int start, int finish,
+			      Integer age, String email, String phoneNum) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.status = status;
+		this.start = LocalTime.of(start, 0);
+		this.finish = LocalTime.of(finish, 0);
+		
+		this.age = age;
+		this.email = email;
+		this.phoneNum = phoneNum;
+	}
+	
+	// constructor with address included (without location)
+	public Driver(String firstName, String lastName, Status status, int start, int finish,
+				 Integer age, String email, String phoneNum , Address address) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.status = status;
+		this.start = LocalTime.of(start, 0);
+		this.finish = LocalTime.of(finish, 0);
+		
+		this.age = age;
+		this.email = email;
+		this.phoneNum = phoneNum;
+		this.address = address;
+	}
+	
+	// constructor with everything (address + location)
+	public Driver(String firstName, String lastName, Status status, int startH, int finish, Location location,
+				  Integer age, String email, String phoneNum , Address address) {
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.status = status;
+		this.start = LocalTime.of(startH, 0);
+		this.finish = LocalTime.of(finish, 0);
+		this.location = location;
+		
+		this.age = age;
+		this.email = email;
+		this.phoneNum = phoneNum;
+		
+		this.address = address;
+	}
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(age, id, email, firstName, lastName, phoneNum, status, finish, start);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Driver))
+			return false;
+		Driver other = (Driver) obj;
+		return Objects.equals(age, other.age) && Objects.equals(id, other.id)
+				&& Objects.equals(email, other.email) && Objects.equals(firstName, other.firstName)
+				&& Objects.equals(lastName, other.lastName) && Objects.equals(phoneNum, other.phoneNum)
+				&& status == other.status && Objects.equals(finish, other.finish)
+				&& Objects.equals(start, other.start)
+				//nested objects compare
+				&& this.getAddress().equals(other.getAddress())
+				&& this.getLocation().equals(other.getLocation());
+	}
+
+	
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setDriverId(Long id) {
+		this.id = id;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+
+	public Integer getAge() {
+		return age;
+	}
+
+	public void setAge(Integer age) {
+		this.age = age;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPhoneNum() {
+		return phoneNum;
+	}
+
+	public void setPhoneNum(String phoneNum) {
+		this.phoneNum = phoneNum;
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
+	public LocalTime getStart() {
+		return start;
+	}
+
+	public void setStart(LocalTime start) {
+		this.start = start;
+	}
+
+	public LocalTime getFinish() {
+		return finish;
+	}
+
+	public void setFinish(LocalTime finish) {
+		this.finish = finish;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public void setAddress(Address address) {
+		this.address = address;
+	}
+
+	public Location getLocation() {
+		return location;
+	}
+
+	public void setLocation(Location location) {
+		this.location = location;
+	}
+
+	@Override
+	public String toString() {
+		return "Driver [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", start=" + start
+				+ ", finish=" + finish + ", status=" + status + ", location=" + location + ", age=" + age + ", email="
+				+ email + ", phoneNum=" + phoneNum + ", address=" + address + "]";
+	}
+}
+
+

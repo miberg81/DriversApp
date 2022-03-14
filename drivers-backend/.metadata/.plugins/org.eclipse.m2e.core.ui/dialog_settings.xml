@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="MavenProjectImportWizardPage">
+		<list key="rootDirectory">
+			<item value="C:\Michael\Dev\Workspaces\DriversApp\spring-cloud-config-server"/>
+			<item value="C:\Michael\Dev\Workspaces\DriversApp\drivers-backend\spring-cloud-config-server"/>
+			<item value="C:\Michael\Dev\Workspaces\DriversApp\drivers-backend\drivers-service"/>
+			<item value="C:\Michael\Dev\Workspaces\Training\drivers-service"/>
+		</list>
+		<list key="projectNameTemplate">
+			<item value="[artifactId]"/>
+			<item value="[artifactId]-TRUNK"/>
+			<item value="[artifactId]-[version]"/>
+			<item value="[groupId].[artifactId]"/>
+			<item value="[groupId].[artifactId]-[version]"/>
+			<item value="[name]"/>
+		</list>
+	</section>
+	<section name="org.eclipse.m2e.core.pom.overview">
+	</section>
+	<section name="org.eclipse.m2e.core.pom.dependencies">
+	</section>
+</section>

@@ -1,0 +1,2 @@
+spring.application.name=spring-cloud-config-server
+spring.cloud.config.server.git.uri=file:///C:/Michael/Dev/Workspaces/DriversApp/drivers-backend/git-localconfig-repo

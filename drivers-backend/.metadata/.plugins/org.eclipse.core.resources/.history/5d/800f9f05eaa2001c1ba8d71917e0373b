@@ -1,0 +1,81 @@
+package com.michael.microservices.driversservice;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import com.michael.microservices.driversservice.bean.Address;
+import com.michael.microservices.driversservice.bean.Driver;
+import com.michael.microservices.driversservice.bean.DriverStatus;
+import com.michael.microservices.driversservice.bean.DriversRepository;
+import com.michael.microservices.driversservice.bean.Location;
+
+@Configuration
+public class LoadDatabase {
+	private static final Logger log = LoggerFactory.getLogger(LoadDatabase.class);
+
+	@Bean
+	CommandLineRunner initDatabase(DriversRepository repository) {
+		return args -> {
+			// DRIVERS LOCATED IN HAIFA
+			log.info("Preloading " + repository.save(
+						new Driver(
+							"driver1", "last_name1", DriverStatus.ACTIVE, 
+							21, "email1@gmail.com", "0507656451",   8, 16, 
+							new Address("Country1", "North", "City1", "street1", 1, 1, 1, "11111", "i live somewhere1"),
+							new Location(32.819683, 34.967200))));
+			log.info("Preloading " + repository.save(
+						new Driver(
+							"driver2", "last_name2", DriverStatus.ACTIVE, 
+							21, "email2@gmail.com", "0507656452",  8, 16,
+							new Address("Country2", "North", "City2", "street2", 2, 2, 2, "22222", "i live somewhere2"),
+							new Location(32.814767, 34.987945))));
+			log.info("Preloading " + repository.save(
+						new Driver(
+							"driver3", "last_name3", DriverStatus.ACTIVE, 
+							21, "email3@gmail.com", "0507656453",  8, 16,
+							new Address("Country3", "North", "City3", "street1", 3, 3, 3, "33333", "i live somewhere3"),
+							new Location(32.801188, 34.981083))));
+			
+			// DRIVERS LOCATED IN TEL-AVIV (EAST OF AYALON)
+			log.info("Preloading " + repository.save(
+						new Driver(
+							"driver4", "last_name4", DriverStatus.ACTIVE, 
+							21, "email4@gmail.com", "0507656454", 8, 16,
+							new Address("Country4", "North", "City4", "street1", 4, 4, 4, "44444", "i live somewhere4"),
+							new Location(32.088341, 32.088341))));
+			log.info("Preloading " + repository.save(
+						new Driver(
+							"driver5", "last_name5", DriverStatus.ACTIVE, 
+							21, "email5@gmail.com", "0507656455", 8, 16,
+							new Address("Country5", "North", "City5", "street5", 5, 5, 5, "555555", "i live somewhere5"),
+							new Location(32.080469, 34.777150))));
+			log.info("Preloading " + repository
+					.save(new Driver("driver6", "last_name6", DriverStatus.ACTIVE,
+							21, "email6@gmail.com", "0507656456", 8, 16,
+							new Address("Country6", "North", "City6", "street1", 6, 6, 6, "12345", "i live somewhere6"),
+							new Location(32.084751, 34.788748))));
+			
+			// DRIVERS LOCATED IN RAMAT-GAN/GIVATAYIM... (WEST OF AYALON)
+			log.info("Preloading " + repository.save(new Driver(
+							"driver7", "last_name7", DriverStatus.ACTIVE, 
+							21, "email7@gmail.com", "0507656457", 8, 16,
+							new Address("Country7", "North", "City7", "street1", 7, 7, 7, "77777", "i live somewhere7"),
+							new Location(32.075244, 34.806397))));
+			log.info("Preloading " + repository
+					.save(new Driver("driver8", "last_name8", 21, "email8@gmail.com", "0507656458", 8, 16,
+							new Address("Country8", "North", "City8", "street1", 8, 8, 8, "88888", "i live somewhere8"),
+							new Location(32.060902, 34.813965))));
+			log.info("Preloading " + repository
+					.save(new Driver("driver9", "last_name9", 21, "email9@gmail.com", "0507656459", 8, 16,
+							new Address("Country9", "North", "Haifa", "street1", 9, 9, 9, "99999", "i live somewhere9"),
+							new Location(32.066044, 34.827902))));
+			log.info("Preloading " + repository
+					.save(new Driver("driver10", "last_name10", 21, "email10@gmail.com", "0507656410", 10, 10,
+							new Address("Country10", "North", "Haifa", "street10", 10, 10, 10, "10000", "i live somewhere10"),
+							new Location(32.086741, 34.814894))));
+		};
+	}
+}

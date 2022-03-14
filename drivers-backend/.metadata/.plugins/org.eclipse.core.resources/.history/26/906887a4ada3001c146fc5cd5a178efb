@@ -1,0 +1,168 @@
+package com.michael.microservices.driversservice;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import org.junit.After;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.michael.microservices.driversservice.bean.Address;
+import com.michael.microservices.driversservice.bean.Driver;
+import com.michael.microservices.driversservice.bean.DriversRepository;
+import com.michael.microservices.driversservice.bean.Location;
+import com.michael.microservices.driversservice.bean.Status;
+
+
+@RunWith(SpringRunner.class)
+@SpringBootTest()
+@AutoConfigureMockMvc
+//@TestPropertySource(locations = "classpath:application-integrationtest.properties")
+public class DriversRestControllerIntegrationTest {
+	
+	@Autowired
+    private MockMvc mockMvc;
+	
+	@Autowired
+    private DriversRepository repository;
+	
+	// LoadDatabase class has already loaded 10 drivers in db
+	// given array of fetched drivers drivers, 
+	// we check a few instances in the array by name
+	// we expect driver1 at index 0, driver2 at index 1 etc...
+	@Test
+	public void getDriversTest() throws Exception {
+		mockMvc.perform(get("/drivers")
+			      .contentType(MediaType.APPLICATION_JSON))
+			      .andExpect(status().isOk())
+			      .andExpect(content()
+			      .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+			      .andExpect(jsonPath("$[0].firstName", is("driver1")))
+				  .andExpect(jsonPath("$[1].firstName", is("driver2")))
+				  .andExpect(jsonPath("$[9].firstName", is("driver10")));
+	}
+	
+	// check @GetMapping("/drivers/{id}")
+	// given array of initial drivers
+	// we expect to get "driver5" in response for get request to "/drivers/5"
+	// loop through all 10 first drivers to be sure they all work
+	@Test
+	public void getDriverByIdTest() throws Exception {
+		for(int i=1; i<=10; i++) {
+			mockMvc.perform(
+				get("/drivers/"+i)
+				.contentType(MediaType.APPLICATION_JSON))
+				.andExpect(status().isOk())
+				.andExpect(content()
+				.contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+				.andExpect(jsonPath("$.firstName", is("driver"+i))
+			);
+		}
+	}
+	
+	// after posting a new driver with name newDriver
+	// we expect status OK and response with the newly added newDriver
+	@Test
+    public void addNewDriverTest() throws Exception {
+        Driver driver = createTestDriver("newDriver");
+
+        mockMvc.perform(
+        		post("/drivers")
+            .contentType(MediaType.APPLICATION_JSON)
+            .content(toJson(driver)))
+            .andExpect(status().isOk())
+            .andExpect(content()
+		    .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+		    .andExpect(jsonPath("$.firstName", is("newDriver"))
+		);
+    }
+	
+	// we are fetching an existing driver by id
+	// then we override it's properties with the newDriver we create
+	// so we expect a response to have an updated name newDriver5
+	@Test
+    public void replaceDriverTest() throws Exception {
+        Driver driver = createTestDriver("newDriver5");
+
+        mockMvc.perform(
+	    			put("/drivers/5")
+	            .contentType(MediaType.APPLICATION_JSON)
+	            .content(toJson(driver)))
+	            .andExpect(status().isOk())
+	            .andExpect(content()
+			    .contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+			    .andExpect(jsonPath("$.firstName", is("newDriver5"))
+		    );
+    }
+	
+	// test for @PutMapping("/drivers/{id}/location")
+	// we update the existing driver location
+	// we expect to get the updated location back, with OK status
+	// we loop through 10 first driver instances to update the location
+	@Test
+    public void updateLocationTest() throws Exception {
+
+        Location location = createTestLocation();
+        
+        for(int i=1;i<=10;i++) {
+	        	mockMvc.perform(
+		        	put("/drivers/" + i + "/location")
+		        	.contentType(MediaType.APPLICATION_JSON)
+		        	.content(toJson(location)))
+		        	.andExpect(status().isOk())
+		        	.andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
+		        	.andExpect(jsonPath("$.latitude", is(location.getLatitude())))
+		        	.andExpect(jsonPath("$.longitude", is(location.getLongitude()))
+	       );
+        }
+    }
+	
+	public Location createTestLocation() {
+		return new Location(32.819683, 34.967200);
+	}
+
+	public Driver createTestDriver(String firstName) {
+		Driver driver = new Driver(
+				firstName, "last_name1", Status.ACTIVE,  8, 0, 18, 0, 32.819683, 34.967200,
+				21, "email1@gmail.com", "0507656451",  
+				new Address("Israel", "North", "Haifa", "street1" , 1, 1, 34, "11111", "i live somewhere1"));
+        //repository.saveAndFlush(driver);
+		return driver;
+    }
+	
+	/**
+	 * Serialize an object into string with fasterxml library
+	 * @param obj
+	 * @return string - json formatted string representation of the object
+	 */
+	public static String toJson(final Object obj) {
+        try {
+	        	ObjectMapper objectMapper = new ObjectMapper();
+	        	objectMapper.findAndRegisterModules(); //register the datatype support offered by this library
+            String string =  objectMapper.writeValueAsString(obj);
+            return string;
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+	
+//	@After
+//    public void resetDb() {
+//        repository.deleteAll();
+//    }
+}

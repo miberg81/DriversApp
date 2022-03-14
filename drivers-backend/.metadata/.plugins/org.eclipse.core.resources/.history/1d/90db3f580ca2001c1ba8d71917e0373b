@@ -1,0 +1,10 @@
+package com.michael.microservices.driversservice.bean;
+
+public class DriverNotFoundException extends RuntimeException {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 634059583085620132L;
+
+}
