@@ -7,8 +7,12 @@ This app provides both CRUD Apis and query apis to manage drivers as per the tas
 
 The app runs by running DriversServiceApplication 
 The server listens on port 8005.
+To run tests run DriversRestControllerIntegrationTest
 
-Attached here is the list of Get apis to run in postman:
+Please see a link to ALL postman apis collection
+https://www.getpostman.com/collections/56f721a80e1839033807
+
+Attached here is the list of GET apis only to run in browser or postman:
 
 @Get
 getAllDrivers()
@@ -26,5 +30,4 @@ http://localhost:8005/drivers/start/12/0/finish/22/0
 getActiveDrivers()
 http://localhost:8005/drivers
 
-Please see a link to ALL postman apis collection
-https://www.getpostman.com/collections/56f721a80e1839033807
+
