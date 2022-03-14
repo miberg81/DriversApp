@@ -5,6 +5,9 @@ And welcome to the DriversApp
 This is a backend microservice to manage drivers on the road in an elegant way
 This app provides both CRUD Apis and query apis to manage drivers as per the task spec.
 
+The source code to the drivers microservice is under:
+DriversApp/drivers-backend/drivers-service
+
 The app runs by running DriversServiceApplication 
 The server listens on port 8005.
 To run tests run DriversRestControllerIntegrationTest
